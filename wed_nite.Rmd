@@ -1,0 +1,55 @@
+---
+title: "Wed_Inclass"
+author: "Logan DeHay"
+date: "11/17/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# This is a quick-turn challenge.  It relates to Question 2 of Quiz 8 in our course. Take a look at that quiz question and then.
+
+## The researchers wanted to know if the spiders could run faster, on average, without the hindrance of a pedipalp
+
+### Finish this writeUp and knit the result to a pdf file.  
+
+
+### Then add this to your github account and turn it in by emailing me the link to it in your github account,
+
+
+
+```{r, message=FALSE}
+require(tidyverse)
+require(tigerstats)
+require(abd)
+data("SpiderSpeed")
+```
+# Graphical Results
+```{r, eval=TRUE}
+#mydata <- gather(SpiderSpeed, variable, value) 
+dat <- gather(SpiderSpeed, BorA, speed)
+```
+
+```{r}
+boxplot(speed~BorA,data=dat, main="Speeds Before and After")
+```
+  
+The boxplot illustrates a general trend of an increased pace in spiders after they have had one pedipalp removed. However, the speed after this procedure seems to have a greater variation.
+  
+# Numerical Results
+  
+```{r}
+favstats(speed~BorA,data=dat)
+```
+  
+The data calculations show an increased mean speed after the removal procedure, changing from 2.66 to 3.85.There also was an increased standard deviation from 0.64 to 0.99 speed variation.
+  
+# Inferential Results
+  
+```{r}
+t.test(speed~BorA,data=dat)
+```
+  
+The Welch Two sample T-Test indicated a p-value of 0.0004611 in which the spiders have a relatively small likelihood of mimicking this behavior without the alteration of the pedipalps. This p-value is small enough to indicate a correlation between the removal of a pedipalp and the speed of the spider. The 95% confidence interval ranges from 0.577 to 1.79.
+  
+  
